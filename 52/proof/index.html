@@ -23,17 +23,18 @@
   .note{color:var(--dim);font-size:13px;margin-top:6px}
   hr{border:0;border-top:1px solid var(--line);margin:34px 0}
   code{background:#141220;padding:1px 5px;border-radius:4px;font-size:13px}
+  a{display:block}
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <h1>52 · PROOF</h1>
-<p class="sub">Four images. What each one actually proves, and where it does not apply.</p>
+<p class="sub" style="color:#8f8aa0">Thumbnails load light — tap any image for the full capture.<br>Four images. What each one actually proves, and where it does not apply.</p>
 
 <figure>
   <span class="tag no">FEATURE NOT ENGAGED HERE</span>
-  <img src="1-your-link-bare.png" alt="aeth/live opened bare — orb fully opaque over a dusk gradient">
+  <a href="full/1-your-link-bare.png"><img src="1-your-link-bare.jpg" loading="lazy" decoding="async" alt="aeth/live opened bare — orb fully opaque over a dusk gradient"></a>
   <figcaption><strong>1 — Your link, opened bare.</strong> <code>/aeth/live</code></figcaption>
   <p class="note">Dusk gradient, mountain silhouette, orb fully solid. Standalone mode pins
   alpha to 1.0 by design, so idle-invisible does <strong>not</strong> engage on the bare link.
@@ -42,7 +43,7 @@
 
 <figure>
   <span class="tag ok">IDLE = 0/255</span>
-  <img src="2-idle-invisible.png" alt="Text fully legible through the idle overlay">
+  <a href="full/2-idle-invisible.png"><img src="2-idle-invisible.jpg" loading="lazy" decoding="async" alt="Text fully legible through the idle overlay"></a>
   <figcaption><strong>2 — Idle, overlay mode.</strong> <code>?overlay=1</code></figcaption>
   <p class="note">Every word readable straight through. The 8-step grey ramp holds pure white
   at one end and pure black at the other — no veil. Measured peak alpha <strong>0/255</strong>
@@ -51,7 +52,7 @@
 
 <figure>
   <span class="tag ok">ACTIVE = 77/255 = 30.2%</span>
-  <img src="3-active-30pct.png" alt="Avatar present with rim and specular, text still readable">
+  <a href="full/3-active-30pct.png"><img src="3-active-30pct.jpg" loading="lazy" decoding="async" alt="Avatar present with rim and specular, text still readable"></a>
   <figcaption><strong>3 — Active, finger down.</strong></figcaption>
   <p class="note">Rim, specular and liquid warp all present with real depth — and the text is
   still readable through it. Alpha derives from brightness, so the orb can only add light,
@@ -60,7 +61,7 @@
 
 <figure>
   <span class="tag ok">2:1 → TRUE 360</span>
-  <img src="4-pano-2to1.png" alt="Synthetic 2:1 panorama, red upper hemisphere, blue lower">
+  <a href="full/4-pano-2to1.png"><img src="4-pano-2to1.jpg" loading="lazy" decoding="async" alt="Synthetic 2:1 panorama, red upper hemisphere, blue lower"></a>
   <figcaption><strong>4 — Synthetic 2:1 panorama.</strong> red top / blue bottom</figcaption>
   <p class="note">Red overhead, blue below, one clean horizon — through
   <code>equirect()</code>. Confirms the rule: a 2:1 image is treated as a real 360.
