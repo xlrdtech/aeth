@@ -1432,7 +1432,32 @@ void main(){
     // lens - raising it shows more WARP, not more dark body. That distinction is
     // MEASURED per version below, never assumed.
     float presence = pPres + pPresV*voice;
-    c = mix(wBase, c, presence);
+    // ⭐⭐⭐⭐ THE REFERENCE IS THE BENT SAMPLE, NOT THE STRAIGHT ONE — qi 2026-08-26:
+    //   "100% translucent, but it has to have its own density"
+    // ONE token was the whole defect. presence was fusing TWO unrelated quantities
+    // into a single scalar: HOW MUCH THE INTERIOR IS WARPED, and HOW MUCH BODY
+    // COLOUR the orb adds on top. Mixing against wBase = world(rd) meant that at
+    // rest 90% of every interior pixel was the backdrop sampled along the
+    // UNDISPLACED ray - the identical pixel the screen would show with no orb there
+    // at all - so measured interior displacement was 0.0 px BY CONSTRUCTION, no
+    // matter what pBendMix or pMag did upstream. The lens was computed correctly at
+    // 1186-1216 and then thrown away here.
+    // behind is world(bendDir): the SAME environment, the SAME exposure, read one
+    // refracted ray over. Swapping the reference restores the full geometric bend at
+    // rest while changing NOTHING about how much colour the body contributes -
+    // presence still gates mirror, sheen, rim and specular exactly as before.
+    // ⛔ This does NOT raise the 0.10 floor. The floor law above stands untouched:
+    //    the body still contributes 10% of its colour at rest. What changed is that
+    //    the other 90% is now the LENS instead of a flat copy of the background,
+    //    which is what "warping the environment" meant every time he said it.
+    // ⛔ No darkening is possible here: a pixel that samples the world ten pixels
+    //    sideways is exactly as bright as one that samples it straight. Same texture,
+    //    same exposure, same tonemap. That is his "translucent but with its own
+    //    density" restated as arithmetic - density carried by DISPLACEMENT, never by
+    //    pigment and never by opacity.
+    // ⛔ Alpha is untouched, and behind exists only inside the sphere-hit branch,
+    //    so every pixel OUTSIDE the silhouette is byte-identical to before.
+    c = mix(behind, c, presence);
     // chrome contrast: pivot on the orb's own mean so the MEAN is preserved
     // 🔴 STALE PIVOT - provable without a camera. orbHere is sampled at the TOP of this
     // block, then c is rescaled by up to 14x by the equalizer and mixed with world(rd)
